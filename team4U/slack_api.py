@@ -15,7 +15,6 @@ CHANNEL_ID = os.getenv('CHANNEL_ID')
 print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
 print(f"CHANNEL_ID: {CHANNEL_ID}")
 print("sdsdsdsdsdsdsd")
-print("sadsdsdsd")
 
 # Create a WebClient object with your token
 client = WebClient(token=SLACK_BOT_TOKEN)
@@ -88,6 +87,27 @@ def fetch_channel_history(channel_id):
     except SlackApiError as e:
         print(f"Error fetching conversations: {e.response['error']}")
 
+def perform_git_operations():
+    repo_path = 'C:/Users/user/Desktop/projects/Team4U'  # Change this to the path of your repository
+
+    # Open the repository
+    repo = Repo(repo_path)
+
+    # Check if there are changes to commit
+    if repo.is_dirty():
+        # Add all changes
+        repo.git.add(A=True)
+
+        # Commit changes
+        repo.index.commit('Update slack_messages.csv with new data')
+
+        # Push changes to remote
+        origin = repo.remotes.origin
+        origin.push()
+
+        print('Git push was successful!')
+    else:
+        print('No changes to commit.')
 
 # Call the function with the channel ID
 fetch_channel_history(CHANNEL_ID)
