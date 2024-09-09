@@ -1,11 +1,27 @@
 import csv
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+import os
+from dotenv import load_dotenv
 
+# טען את משתני הסביבה מקובץ .env
+load_dotenv(dotenv_path='.env')  # וודא שהקובץ נטען
 
+# השתמש במשתנים
+SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOKEN')
+CHANNEL_ID = os.getenv('CHANNEL_ID')
 
+# הדפס הערכים לצורך בדיקה
+print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
+print(f"CHANNEL_ID: {CHANNEL_ID}")
+print("sdsdsdsdsdsdsd")
+
+# Create a WebClient object with your token
+client = WebClient(token=SLACK_BOT_TOKEN)
 
 def fetch_channel_history(channel_id):
+    print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
+    print(f"CHANNEL_ID: {CHANNEL_ID}")
 
     try:
         # Open a CSV file for writing
@@ -73,4 +89,4 @@ def fetch_channel_history(channel_id):
 
 
 # Call the function with the channel ID
-fetch_channel_history()
+fetch_channel_history(CHANNEL_ID)
