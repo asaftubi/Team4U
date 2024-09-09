@@ -14,7 +14,6 @@ CHANNEL_ID = os.getenv('CHANNEL_ID')
 # הדפס הערכים לצורך בדיקה
 print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
 print(f"CHANNEL_ID: {CHANNEL_ID}")
-print("sdsdsdsdsdsdsd")
 
 # Create a WebClient object with your token
 client = WebClient(token=SLACK_BOT_TOKEN)
