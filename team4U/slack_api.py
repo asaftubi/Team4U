@@ -4,8 +4,8 @@ from slack_sdk.errors import SlackApiError
 import os
 from dotenv import load_dotenv
 
-# טען את משתני הסביבה מקובץ env
-load_dotenv(dotenv_path='env')  # וודא שהקובץ נטען
+# טען את משתני הסביבה מקובץ .env
+load_dotenv(dotenv_path='.env')  # וודא שהקובץ נטען
 
 # השתמש במשתנים
 SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOKEN')
