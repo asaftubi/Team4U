@@ -19,9 +19,11 @@ print("hello team4U")
 # Create a WebClient object with your token
 client = WebClient(token=SLACK_BOT_TOKEN)
 
+
 def fetch_channel_history(channel_id):
     print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
     print(f"CHANNEL_ID: {CHANNEL_ID}")
+    print("bcfbgvf")
 
     try:
         # Open a CSV file for writing
