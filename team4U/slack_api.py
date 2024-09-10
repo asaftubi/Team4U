@@ -11,8 +11,8 @@ load_dotenv(dotenv_path='.env')  # וודא שהקובץ נטען
 SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
 
-
-print("sasaa")
+print(SLACK_BOT_TOKEN)
+print(CHANNEL_ID)
 print("hello team4U")
 
 # Create a WebClient object with your token
