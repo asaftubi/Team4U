@@ -11,9 +11,7 @@ load_dotenv(dotenv_path='.env')  # וודא שהקובץ נטען
 SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
 
-# הדפס הערכים לצורך בדיקה
-print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
-print(f"CHANNEL_ID: {CHANNEL_ID}")
+
 print("hello team4U")
 
 # Create a WebClient object with your token
@@ -21,10 +19,6 @@ client = WebClient(token=SLACK_BOT_TOKEN)
 
 
 def fetch_channel_history(channel_id):
-    print(f"SLACK_BOT_TOKEN: {SLACK_BOT_TOKEN}")
-    print(f"CHANNEL_ID: {CHANNEL_ID}")
-    print("bcfbgvf")
-
     try:
         # Open a CSV file for writing
         with open('slack_messages.csv', mode='w', newline='', encoding='utf-8') as file:
