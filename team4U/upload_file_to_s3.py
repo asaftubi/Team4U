@@ -1,6 +1,4 @@
-
 # pip install boto3
-
 import os
 import boto3
 from dotenv import load_dotenv
@@ -8,6 +6,7 @@ from botocore.exceptions import NoCredentialsError
 
 # Load the .env file
 load_dotenv()
+
 
 def upload_to_s3(file_name, bucket, object_name=None):
     # If S3 object_name was not specified, use file_name
@@ -28,6 +27,7 @@ def upload_to_s3(file_name, bucket, object_name=None):
         print(f"The file {file_name} was not found.")
     except NoCredentialsError:
         print("Credentials not available.")
+
 
 # Example usage
 file_name = 'path/to/your/file.txt'
