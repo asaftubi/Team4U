@@ -17,7 +17,6 @@ SLACK_CHANNEL_ID = os.getenv('SLACK_CHANNEL_ID')
 
 print(SLACK_BOT_TOKEN)
 print(SLACK_CHANNEL_ID)
-print("hello team4U")
 
 # Create a WebClient object with your token
 client = WebClient(token=SLACK_BOT_TOKEN)
