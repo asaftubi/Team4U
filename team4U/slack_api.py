@@ -13,10 +13,10 @@ load_dotenv(dotenv_path='.env')  # וודא שהקובץ נטען
 
 # השתמש במשתנים
 SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOKEN')
-CHANNEL_ID = os.getenv('CHANNEL_ID')
+SLACK_CHANNEL_ID = os.getenv('SLACK_CHANNEL_ID')
 
 print(SLACK_BOT_TOKEN)
-print(CHANNEL_ID)
+print(SLACK_CHANNEL_ID)
 print("hello team4U")
 
 # Create a WebClient object with your token
@@ -90,4 +90,4 @@ def fetch_channel_history(channel_id):
 
 
 # Call the function with the channel ID
-fetch_channel_history(CHANNEL_ID)
+fetch_channel_history(SLACK_CHANNEL_ID)
