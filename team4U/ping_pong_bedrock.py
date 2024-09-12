@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 
 # טען את משתני הסביבה מקובץ .env
-load_dotenv(dotenv_path='/.env')
+load_dotenv(dotenv_path='.env')
 # השתמש במשתנים
 
 
