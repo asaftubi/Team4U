@@ -28,6 +28,7 @@ def main():
                 {"role": "user", "content": user_message}
             ],
             "temperature": 0.5
+
         })
 
         response = client.invoke_model(
