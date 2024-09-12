@@ -24,12 +24,7 @@ def main():
             "messages": [
                 {"role": "user", "content": user_message}
             ],
-<<<<<<< HEAD
-            "temperature": 0.5
-
-=======
             "temperature": 0.1
->>>>>>> e91340ce2070c6b6f09e915aa54d275f12140ef8
         })
 
         response = client.invoke_model(
