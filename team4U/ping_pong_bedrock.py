@@ -1,19 +1,16 @@
 import boto3
 import json
 from botocore.exceptions import ClientError
-
 import os
 from dotenv import load_dotenv
 
 # טען את משתני הסביבה מקובץ .env
-load_dotenv(dotenv_path='/.env')
-# השתמש במשתנים
+load_dotenv(dotenv_path='.env')
 
 def main():
     client = boto3.client("bedrock-runtime",
-
-                        aws_access_key_id=os.getenv('aws_access_key_id'),
-                        aws_secret_access_key=os.getenv('aws_secret_access_key'),
+                          aws_access_key_id=os.getenv('aws_access_key_id'),
+                          aws_secret_access_key=os.getenv('aws_secret_access_key'),
                           region_name="eu-west-1",
                           )
     model_id = "eu.anthropic.claude-3-5-sonnet-20240620-v1:0"
@@ -27,7 +24,7 @@ def main():
             "messages": [
                 {"role": "user", "content": user_message}
             ],
-            "temperature": 0.5
+            "temperature": 0.1
         })
 
         response = client.invoke_model(
