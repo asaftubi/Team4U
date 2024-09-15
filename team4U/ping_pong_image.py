@@ -5,6 +5,7 @@ import os
 import random
 from botocore.exceptions import ClientError
 
+
 def generate_image(prompt, model_id="amazon.titan-image-generator-v2:0", output_dir="output"):
     # Create a Bedrock Runtime client
     client = boto3.client("bedrock-runtime", region_name="us-east-1")
