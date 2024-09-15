@@ -1,12 +1,19 @@
 import base64
 import boto3
 import json
-import os
 import random
 from botocore.exceptions import ClientError
+import os
+from dotenv import load_dotenv
+
+# טען את משתני הסביבה מקובץ .env
+load_dotenv(dotenv_path='.env')
 
 
-def generate_image(prompt, model_id="amazon.titan-image-generator-v2:0", output_dir="output"):
+def generate_image(prompt, model_id="amazon.titan-image-generator-v2:0",
+                   aws_access_key_id=os.getenv('aws_access_key_id'),
+                   aws_secret_access_key=os.getenv('aws_secret_access_key'),
+                   region_name="eu-west-1", output_dir="output"):
     # Create a Bedrock Runtime client
     client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
