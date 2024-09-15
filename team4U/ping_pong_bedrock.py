@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path='.env')
 # השתמש במשתנים
 
+
 def main():
     client = boto3.client("bedrock-runtime",
 
