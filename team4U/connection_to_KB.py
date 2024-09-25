@@ -36,5 +36,5 @@ response = bedrock_client.retrieve_and_generate(**request_body)
 # קבלת התוצאה מהמודל
 configuration = response['output']['text']
 
-print(487578920346572364578)
+
 print(configuration)
