@@ -1,56 +1,70 @@
 import boto3
-import json
-from botocore.exceptions import ClientError
+import logging
+import sys
 import os
 from dotenv import load_dotenv
-
-# טען את משתני הסביבה מקובץ .env
 load_dotenv(dotenv_path='.env')
 
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+def query_knowledge_base(message):
+    bedrock_agent_runtime = boto3.client('bedrock-agent-runtime',
+        aws_access_key_id=os.getenv('aws_access_key_id'),
+        aws_secret_access_key=os.getenv('aws_secret_access_key'),
+        region_name="us-east-1" ) # שנה בהתאם)
+
+    request_body = {
+        "input": {
+            "text": message
+        },
+        "retrieveAndGenerateConfiguration": {
+            "type": "KNOWLEDGE_BASE",
+            "knowledgeBaseConfiguration": {
+                "knowledgeBaseId": "IFGNAI9DOT",
+                "modelArn": "anthropic.claude-3-5-sonnet-20240620-v1:0"
+            }
+        }
+    }
+
+    response = bedrock_agent_runtime.retrieve_and_generate(**request_body)
+
+    generated_text = response['output']['text']
+    return generated_text
+
+
 def main():
-    client = boto3.client("bedrock-runtime",
-                          aws_access_key_id=os.getenv('aws_access_key_id'),
-                          aws_secret_access_key=os.getenv('aws_secret_access_key'),
-                          region_name="eu-west-1",
-                          )
-    model_id = "eu.anthropic.claude-3-5-sonnet-20240620-v1:0"
-    system_prompt = "You are a helpful assistant."
-    user_message = "who is lebron james?"
+    print("Welcome to the AWS Bedrock Knowledge Base Query Tool")
+    print("Type 'quit' to exit the program")
 
-    try:
-        prompt_payload = json.dumps({
-            "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": 70,
-            "messages": [
-                {"role": "user", "content": user_message}
-            ],
-<<<<<<< HEAD
-            "temperature": 0.5
+    while True:
+        user_input = input("\nEnter your question: ").strip()
 
-=======
-            "temperature": 0.1
->>>>>>> e91340ce2070c6b6f09e915aa54d275f12140ef8
-        })
+        if user_input.lower() == 'quit':
+            print("Thank you for using the AWS Bedrock Knowledge Base Query Tool. Goodbye!")
+            break
 
-        response = client.invoke_model(
-            modelId=model_id,
-            contentType="application/json",
-            body=prompt_payload
-        )
+        if not user_input:
+            print("Please enter a valid question.")
+            continue
 
-        response_body = json.loads(response["body"].read())
-        print(f"Model Response: {response_body}")
-        # print(f"Model Response: {response_body['content'][0]['text']}")
+        try:
+            logger.info(f"Querying knowledge base with: {user_input}")
+            answer = query_knowledge_base(user_input)
 
-
-    except ClientError as e:
-        if e.response['Error']['Code'] == 'ValidationException':
-            print(f"Validation Error: {e}")
-        elif e.response['Error']['Code'] == 'AccessDeniedException':
-            print("Access Denied. Check your IAM permissions and Bedrock model access.")
-        else:
-            print(f"Unexpected error: {e}")
+            print("\nAnswer:")
+            print(answer)
+        except Exception as e:
+            logger.error(f"An error occurred: {e}")
+            print("Sorry, I couldn't generate an answer. Please try again or rephrase your question.")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nProgram interrupted by user. Exiting...")
+        sys.exit(0)
