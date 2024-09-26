@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 def query_knowledge_base(message):
     bedrock_agent_runtime = boto3.client('bedrock-agent-runtime',
-        aws_access_key_id=os.getenv('aws_access_key_id'),
-        aws_secret_access_key=os.getenv('aws_secret_access_key'),
-        region_name="us-east-1" ) # שנה בהתאם)
+                                         aws_access_key_id=os.getenv('aws_access_key_id'),
+                                         aws_secret_access_key=os.getenv('aws_secret_access_key'),
+                                         region_name="us-east-1" ) # שנה בהתאם)
 
     request_body = {
         "input": {
@@ -41,23 +41,30 @@ def main():
     print("Type 'quit' to exit the program")
 
     while True:
+        # Get input from the user
         user_input = input("\nEnter your question: ").strip()
 
+        # If the user wants to quit
         if user_input.lower() == 'quit':
             print("Thank you for using the AWS Bedrock Knowledge Base Query Tool. Goodbye!")
-            break
+            break  # Exit the loop
 
+        # Check if input is empty
         if not user_input:
             print("Please enter a valid question.")
-            continue
+            continue  # Skip to the next iteration of the loop
 
         try:
+            # Log and query the knowledge base
             logger.info(f"Querying knowledge base with: {user_input}")
             answer = query_knowledge_base(user_input)
 
+            # Display the answer
             print("\nAnswer:")
             print(answer)
+
         except Exception as e:
+            # Log and display the error message
             logger.error(f"An error occurred: {e}")
             print("Sorry, I couldn't generate an answer. Please try again or rephrase your question.")
 
