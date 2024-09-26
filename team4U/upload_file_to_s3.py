@@ -30,8 +30,8 @@ def upload_to_s3(file_name, bucket, object_name=None):
 
 
 # Example usage
-file_name = 'path/to/your/file.txt'
-bucket_name = 'your-bucket-name'
-object_name = 'destination/path/in/s3.txt'
+file_name = 'C:/Users/user/Desktop/projects/Team4U/team4U/slack_messages.csv'
+bucket_name = 'kb-team4u'
+object_name = 'testAsaf'
 
 upload_to_s3(file_name, bucket_name, object_name)
